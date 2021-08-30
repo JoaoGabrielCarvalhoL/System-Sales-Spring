@@ -28,6 +28,8 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orderItems;
 
+    private StatusOrder statusOrder;
+
     public Order() {
 
     }
@@ -49,6 +51,10 @@ public class Order {
 
     public Client getClient() {
         return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public LocalDate getOrderDate() {
@@ -73,6 +79,15 @@ public class Order {
 
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public StatusOrder getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(StatusOrder statusOrder) {
+        this.statusOrder = statusOrder;
     }
 
 
