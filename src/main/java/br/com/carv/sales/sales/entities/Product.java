@@ -1,6 +1,8 @@
 package br.com.carv.sales.sales.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -13,9 +15,11 @@ public class Product {
     private Integer idProduct;
 
     @Column(nullable = false, length = 100)
+    @NotEmpty(message = "Description of Product field is mandatory.")
     private String descriptionProduct;
 
     @Column(precision = 9, scale = 2)
+    @NotNull
     private BigDecimal unitPrice;
 
     public Product() {

@@ -1,7 +1,9 @@
 package br.com.carv.sales.sales.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -14,9 +16,12 @@ public class Client {
     private Integer idClient;
 
     @Column(nullable = false, length = 50)
+    @NotEmpty(message = "Name field is mandatory.")
     private String nameClient;
 
     @Column(nullable = false, length = 11)
+    @NotEmpty(message = "Cpf Client field is mandatory.")
+    @CPF(message = "Enter a valid CPF.")
     private String cpfClient;
 
     @JsonIgnore

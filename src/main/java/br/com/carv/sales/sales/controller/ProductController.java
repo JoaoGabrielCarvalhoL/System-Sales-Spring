@@ -7,6 +7,7 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/saveProduct")
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> saveProduct(@RequestBody @Valid Product product) {
         Product productToSave = productRepository.save(product);
         return ResponseEntity.ok(productToSave);
     }
@@ -52,7 +53,7 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/updateProduct/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id) {
+    public ResponseEntity<Product> updateProduct(@PathVariable @Valid Integer id) {
         Optional<Product> product = productRepository.findById(id);
 
         if (product.isPresent()) {

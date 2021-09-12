@@ -5,6 +5,8 @@ import br.com.carv.sales.sales.entities.Client;
 import br.com.carv.sales.sales.repositories.ClientRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,7 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/saveClient")
-    public ResponseEntity<Client> saveClient(@RequestBody Client client) {
+    public ResponseEntity<Client> saveClient(@RequestBody @Valid Client client) {
         Client clientToSave = clientRepository.save(client);
         return ResponseEntity.ok(clientToSave);
     }
@@ -65,7 +67,7 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/updateClientById/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Integer id, @RequestBody Client client) {
+    public ResponseEntity<Client> updateClient(@PathVariable Integer id, @RequestBody @Valid Client client) {
        Optional<Client> clientToUpdate = clientRepository.findById(id);
        if(clientToUpdate.isPresent()) {
            clientToUpdate.get().setNameClient(client.getName());
